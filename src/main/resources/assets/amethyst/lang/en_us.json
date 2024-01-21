@@ -1,0 +1,31 @@
+{
+  "rarity.amethyst.common": "Common",
+  "rarity.amethyst.uncommon": "Uncommon",
+  "rarity.amethyst.rare": "Rare",
+  "rarity.amethyst.epic": "Epic",
+  "rarity.amethyst.legendary": "Legendary",
+  "rarity.amethyst.mythic": "Mythic",
+  "rarity.amethyst.special": "Special",
+
+  "attribute.name.amethyst.health": "Health",
+  "attribute.name.amethyst.intelligence": "Intelligence",
+  "attribute.name.amethyst.strength": "Strength",
+  "attribute.name.amethyst.critical_chance": "Critical Chance",
+  "attribute.name.amethyst.critical_damage": "Critical Damage",
+  "attribute.name.amethyst.defense": "Defense",
+  "attribute.name.amethyst.attack_speed": "Attack Speed",
+  "attribute.name.amethyst.ferocity": "Ferocity",
+  "attribute.name.amethyst.speed": "Speed",
+  "attribute.name.amethyst.magic_find": "Magic Find",
+
+  "attribute.symbol.amethyst.health": "❤",
+  "attribute.symbol.amethyst.intelligence": "✎",
+  "attribute.symbol.amethyst.strength": "❁",
+  "attribute.symbol.amethyst.critical_chance": "☣",
+  "attribute.symbol.amethyst.critical_damage": "☠",
+  "attribute.symbol.amethyst.defense": "❈",
+  "attribute.symbol.amethyst.attack_speed": "⚔",
+  "attribute.symbol.amethyst.ferocity": "⫽",
+  "attribute.symbol.amethyst.speed": "✦",
+  "attribute.symbol.amethyst.magic_find": "✯"
+}

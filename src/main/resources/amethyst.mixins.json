@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.cynquil.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MixinAttributeSync",
+    "MixinGenericAttributes"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

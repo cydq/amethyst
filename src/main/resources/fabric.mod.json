@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "amethyst",
+  "version": "${version}",
+  "name": "Amethyst",
+  "description": "Minecraft RPG System",
+  "authors": [
+    "cydq"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/amethyst/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "com.cynquil.amethyst.Amethyst",
+        "adapter": "kotlin"
+      }
+    ],
+    "client": [
+      {
+        "value": "com.cynquil.amethyst.client.AmethystClient",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "amethyst.mixins.json",
+    {
+      "config": "amethyst.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=17",
+    "fabric-api": ">=${fabric_version}",
+    "fabric-language-kotlin": ">=1.9.22"
+  }
+}

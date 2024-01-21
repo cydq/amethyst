@@ -1,0 +1,10 @@
+accessWidener v2 named
+
+accessible  method  net/minecraft/item/ItemStack  getHideFlags              ()I
+accessible  method  net/minecraft/item/ItemStack  isSectionVisible          (ILnet/minecraft/item/ItemStack$TooltipSection;)Z
+
+accessible  field   net/minecraft/item/Item       ATTACK_DAMAGE_MODIFIER_ID Ljava/util/UUID;
+accessible  field   net/minecraft/item/Item       ATTACK_SPEED_MODIFIER_ID  Ljava/util/UUID;
+
+# accessible  field   net/minecraft/entity/attribute/EntityAttributeInstance type             Lnet/minecraft/entity/attribute/EntityAttribute;
+# accessible  field   net/minecraft/entity/attribute/EntityAttributeInstance updateCallback   Ljava/util/function/Consumer;
