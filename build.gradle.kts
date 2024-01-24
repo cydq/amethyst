@@ -1,3 +1,8 @@
+@file:Suppress("UnstableApiUsage")
+
+import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
+import java.net.URI
+
 plugins {
     id("fabric-loom") version "1.5-SNAPSHOT"
     id("maven-publish")
@@ -14,7 +19,10 @@ base {
 }
 
 repositories {
-
+    maven {
+        name = "ParchmentMC"
+        url = URI("https://maven.parchmentmc.org")
+    }
 }
 
 loom {
@@ -33,8 +41,13 @@ loom {
 
 dependencies {
     minecraft("com.mojang:minecraft:${props.minecraftVersion}")
-    mappings("net.fabricmc:yarn:${props.yarnMappings}:v2")
     modImplementation("net.fabricmc:fabric-loader:${props.loaderVersion}")
+
+    mappings("net.fabricmc:yarn:${props.yarnMappings}:v2")
+//    mappings(loom.layered {
+//        officialMojangMappings()
+//        parchment("org.parchmentmc.data:parchment-1.20.3:2023.12.31@zip")
+//    })
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${props.fabricVersion}")
     modImplementation("net.fabricmc:fabric-language-kotlin:${props.kotlinVersion}")

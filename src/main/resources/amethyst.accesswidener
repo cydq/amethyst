@@ -1,10 +1,27 @@
 accessWidener v2 named
 
-accessible  method  net/minecraft/item/ItemStack  getHideFlags              ()I
-accessible  method  net/minecraft/item/ItemStack  isSectionVisible          (ILnet/minecraft/item/ItemStack$TooltipSection;)Z
+accessible method net/minecraft/item/ItemStack  getHideFlags              ()I
+accessible method net/minecraft/item/ItemStack  isSectionVisible          (ILnet/minecraft/item/ItemStack$TooltipSection;)Z
 
-accessible  field   net/minecraft/item/Item       ATTACK_DAMAGE_MODIFIER_ID Ljava/util/UUID;
-accessible  field   net/minecraft/item/Item       ATTACK_SPEED_MODIFIER_ID  Ljava/util/UUID;
+accessible field  net/minecraft/item/Item       ATTACK_DAMAGE_MODIFIER_ID Ljava/util/UUID;
+accessible field  net/minecraft/item/Item       ATTACK_SPEED_MODIFIER_ID  Ljava/util/UUID;
 
-# accessible  field   net/minecraft/entity/attribute/EntityAttributeInstance type             Lnet/minecraft/entity/attribute/EntityAttribute;
-# accessible  field   net/minecraft/entity/attribute/EntityAttributeInstance updateCallback   Ljava/util/function/Consumer;
+accessible field  net/minecraft/entity/attribute/DefaultAttributeContainer$Builder  instances     Ljava/util/Map;
+accessible field  net/minecraft/entity/attribute/DefaultAttributeContainer$Builder  unmodifiable  Z
+
+accessible field  net/minecraft/entity/Entity  dataTracker            Lnet/minecraft/entity/data/DataTracker;
+accessible method net/minecraft/entity/Entity  scheduleVelocityUpdate ()V
+
+accessible field  net/minecraft/entity/LivingEntity  lastDamageTaken  F
+accessible field  net/minecraft/entity/LivingEntity  playerHitTimer   I
+accessible field  net/minecraft/entity/LivingEntity  attackingPlayer  Lnet/minecraft/entity/player/PlayerEntity;
+accessible field  net/minecraft/entity/LivingEntity  lastDamageSource Lnet/minecraft/entity/damage/DamageSource;
+accessible field  net/minecraft/entity/LivingEntity  lastDamageTime   J
+accessible method net/minecraft/entity/LivingEntity  takeShieldHit    (Lnet/minecraft/entity/LivingEntity;)V
+accessible method net/minecraft/entity/LivingEntity  applyDamage      (Lnet/minecraft/entity/damage/DamageSource;F)V
+accessible method net/minecraft/entity/LivingEntity  tryUseTotem      (Lnet/minecraft/entity/damage/DamageSource;)Z
+accessible method net/minecraft/entity/LivingEntity  getDeathSound    ()Lnet/minecraft/sound/SoundEvent;
+accessible method net/minecraft/entity/LivingEntity  getSoundVolume   ()F
+accessible method net/minecraft/entity/LivingEntity  playHurtSound    (Lnet/minecraft/entity/damage/DamageSource;)V
+
+accessible method net/minecraft/entity/mob/MobEntity  disablePlayerShield   (Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)V

@@ -1,10 +1,22 @@
 {
   "required": true,
-  "package": "com.cynquil.mixin",
+  "package": "com.cynquil.amethyst.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MixinAttributeSync",
-    "MixinGenericAttributes"
+    "attribute.MixinAttributeHealth",
+    "attribute.MixinAttributeSync",
+    "attribute.MixinGenericAttributes",
+    "combat.MixinEntityDamage",
+    "combat.MixinMobAttack",
+    "combat.MixinPlayerAttack",
+    "combat.MixinPlayerDamage",
+    "mana.MixinEntityMana",
+    "mana.MixinPlayerManaRegen",
+    "respawn.MixinRemoveGrace",
+    "respawn.MixinRespawnPlayer",
+    "vanilla.MixinArmorItem",
+    "vanilla.MixinMiningToolItem",
+    "vanilla.MixinSwordItem"
   ],
   "injectors": {
     "defaultRequire": 1

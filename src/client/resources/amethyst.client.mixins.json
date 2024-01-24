@@ -1,10 +1,12 @@
 {
   "required": true,
-  "package": "com.cynquil.mixin.client",
+  "package": "com.cynquil.amethyst.mixin.client",
   "compatibilityLevel": "JAVA_17",
   "client": [
     "MixinItemDisplay",
-    "MixinItemHUD"
+    "MixinItemHUD",
+    "overlay.MixinHealthBar",
+    "overlay.MixinManaBar"
   ],
   "injectors": {
     "defaultRequire": 1

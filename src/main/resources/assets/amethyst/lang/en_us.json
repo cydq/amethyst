@@ -1,11 +1,11 @@
 {
-  "rarity.amethyst.common": "Common",
-  "rarity.amethyst.uncommon": "Uncommon",
-  "rarity.amethyst.rare": "Rare",
-  "rarity.amethyst.epic": "Epic",
-  "rarity.amethyst.legendary": "Legendary",
-  "rarity.amethyst.mythic": "Mythic",
-  "rarity.amethyst.special": "Special",
+  "rarity.amethyst.common": "COMMON",
+  "rarity.amethyst.uncommon": "UNCOMMON",
+  "rarity.amethyst.rare": "RARE",
+  "rarity.amethyst.epic": "EPIC",
+  "rarity.amethyst.legendary": "LEGENDARY",
+  "rarity.amethyst.mythic": "MYTHIC",
+  "rarity.amethyst.special": "SPECIAL",
 
   "attribute.name.amethyst.health": "Health",
   "attribute.name.amethyst.intelligence": "Intelligence",
@@ -18,6 +18,8 @@
   "attribute.name.amethyst.speed": "Speed",
   "attribute.name.amethyst.magic_find": "Magic Find",
 
+  "attribute.name.amethyst.damage": "Damage",
+
   "attribute.symbol.amethyst.health": "❤",
   "attribute.symbol.amethyst.intelligence": "✎",
   "attribute.symbol.amethyst.strength": "❁",
@@ -27,5 +29,7 @@
   "attribute.symbol.amethyst.attack_speed": "⚔",
   "attribute.symbol.amethyst.ferocity": "⫽",
   "attribute.symbol.amethyst.speed": "✦",
-  "attribute.symbol.amethyst.magic_find": "✯"
+  "attribute.symbol.amethyst.magic_find": "✯",
+
+  "effect.amethyst.fresh_soul": "Fresh Soul"
 }

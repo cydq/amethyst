@@ -1,4 +1,4 @@
-package com.cynquil.mixin.client;
+package com.cynquil.amethyst.mixin.client;
 
 import com.cynquil.amethyst.client.util.ItemDisplay;
 import net.minecraft.client.item.TooltipContext;
@@ -17,12 +17,12 @@ import java.util.List;
 public abstract class MixinItemDisplay {
     @Inject(at = @At("HEAD"), method = "getTooltip", cancellable = true)
     private void getTooltip(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir) {
-        cir.setReturnValue(ItemDisplay.INSTANCE.getTooltip((ItemStack)(Object)this, player, context));
+        cir.setReturnValue(ItemDisplay.getTooltip((ItemStack)(Object)this, player, context, false));
     }
 
     @Inject(at = @At("HEAD"), method = "getName", cancellable = true)
     private void getName(CallbackInfoReturnable<Text> cir) {
-        cir.setReturnValue(ItemDisplay.INSTANCE.getName((ItemStack)(Object)this));
+        cir.setReturnValue(ItemDisplay.getName((ItemStack)(Object)this));
     }
 
     @Redirect(

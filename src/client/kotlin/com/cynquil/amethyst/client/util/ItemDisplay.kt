@@ -1,9 +1,12 @@
 package com.cynquil.amethyst.client.util
 
+import com.cynquil.amethyst.attribute.Attribute
+import com.cynquil.amethyst.attribute.Attributes
 import com.cynquil.amethyst.client.color.style
 import com.cynquil.amethyst.client.color.tooltipText
 import com.cynquil.amethyst.rarity.HasRarity
 import com.cynquil.amethyst.rarity.Rarity
+import com.ibm.icu.text.DecimalFormat
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.EntityGroup
@@ -20,40 +23,7 @@ import net.minecraft.util.Formatting
 import kotlin.math.abs
 
 object ItemDisplay {
-    private fun determineRarity(stack: ItemStack): Rarity {
-        val item = stack.item
-
-        if (item is HasRarity)
-            return item.rarity
-
-        if (item is EnchantedBookItem) {
-            val enchants = EnchantedBookItem.getEnchantmentNbt(stack)
-
-            return enchants.indices
-                .asSequence()
-                .map { enchants.getCompound(it) }
-                .map { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(it)) }
-                .mapNotNull { it as? HasRarity }
-                .map { it.rarity }
-                .maxByOrNull { it.ordinal } ?: Rarity.Uncommon
-        }
-
-        // Base Item
-        val base = Rarity.fromItemRarity(stack.rarity)
-
-        val enchantmentRarity = stack.enchantments.indices
-            .asSequence()
-            .map { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(stack.enchantments.getCompound(it))) }
-            .mapNotNull { it as? HasRarity }
-            .map { it.rarity }
-            .maxByOrNull { it.ordinal } ?: Rarity.Common
-
-        if (enchantmentRarity.ordinal > base.ordinal)
-            return enchantmentRarity
-
-        return base
-    }
-
+    @JvmStatic
     fun getName(stack: ItemStack): Text {
         val item = stack.item
         val rarity = determineRarity(stack)
@@ -77,7 +47,8 @@ object ItemDisplay {
 //            .setStyle(if (stack.hasCustomName()) rarity.secondaryStyle else rarity.style)
     }
 
-    fun getTooltip(stack: ItemStack, player: PlayerEntity?, context: TooltipContext): List<Text> {
+    @JvmStatic
+    fun getTooltip(stack: ItemStack, player: PlayerEntity?, context: TooltipContext, advanced: Boolean = false): List<Text> {
         val list = mutableListOf<Text>()
 
         val item = stack.item
@@ -90,7 +61,7 @@ object ItemDisplay {
 
         // NAME
         val rarity = determineRarity(stack)
-        list.add(stack.name.copy().setStyle(rarity.style))
+        list.add(stack.name.copy().styled { it.withColor(rarity.style.color) })
 //        list.add(stack.name.copy().setStyle(if (stack.hasCustomName()) rarity.secondaryStyle else rarity.style))
 
         // MAP ID SECTION
@@ -98,7 +69,7 @@ object ItemDisplay {
             val integer = FilledMapItem.getMapId(stack)
 
             if (integer != null) {
-                list.add(Text.literal("#$integer").formatted(Formatting.GRAY))
+                list.add(Text.literal("#$integer").formatted(Formatting.DARK_GRAY))
                 list.add(Text.empty())
             }
         }
@@ -113,58 +84,35 @@ object ItemDisplay {
 
                 multimap.entries().forEach { (key, value) ->
                     val modifier = value as EntityAttributeModifier
-                    var modifierValue = modifier.value
+                    val modifierValue = modifier.value
 
-                    val final =
-                        if (player != null && modifier.id === Item.ATTACK_DAMAGE_MODIFIER_ID) {
-                            modifierValue += player.getAttributeBaseValue(EntityAttributes.GENERIC_ATTACK_DAMAGE)
-                            modifierValue += EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT).toDouble()
+                    if (key !is Attribute)
+                        return@forEach
 
-                            true
-                        } else if (player != null && modifier.id === Item.ATTACK_SPEED_MODIFIER_ID) {
-                            modifierValue += player.getAttributeBaseValue(EntityAttributes.GENERIC_ATTACK_SPEED)
-
-                            true
-                        } else {
-                            false
-                        }
-
-                    val amount =
-                        if (modifier.operation == EntityAttributeModifier.Operation.MULTIPLY_BASE)
-                            modifierValue * 100.0
-                        else if (modifier.operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
-                            modifierValue
-                        else if (key as EntityAttribute == EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE)
-                            modifierValue * 10.0
-                        else
-                            modifierValue
+                    val amount = when (modifier.operation) {
+                        EntityAttributeModifier.Operation.MULTIPLY_BASE -> modifierValue * 100.0
+                        EntityAttributeModifier.Operation.MULTIPLY_TOTAL -> 1 + modifierValue
+                        else -> modifierValue
+                    }
 
                     val amountFmt = ItemStack.MODIFIER_FORMAT.format(abs(amount))
+                    val decimalFmt = DecimalFormat("#.00").format(amount)
                     val sign = if (amount >= 0) "+" else "-"
 
                     list.add(
                         Text.empty()
-                            .append(Text.translatable((key as EntityAttribute).translationKey).formatted(Formatting.BLUE))
-                            .append(Text.literal(": ").formatted(Formatting.BLUE))
+                            .append(Text.translatable((key as EntityAttribute).translationKey).formatted(Formatting.GRAY))
+                            .append(Text.literal(": ").formatted(Formatting.GRAY))
                             .append(
                                 Text.literal(
-                                    when {
-                                        final -> amountFmt
-                                        modifier.operation.id == 0 -> "$sign$amountFmt"
-                                        modifier.operation.id == 1 -> "$sign$amountFmt%"
-                                        modifier.operation.id == 2 -> "${amountFmt}x"
-                                        else -> ""
+                                    when (modifier.operation.id) {
+                                        0 -> "$sign$amountFmt"
+                                        1 -> "$sign$amountFmt%"
+                                        2 -> "x$decimalFmt"
+                                        else -> amountFmt
                                     }
-                                ).formatted(Formatting.GRAY)
+                                ).formatted(Formatting.BLUE)
                             )
-                            .append(Text.literal(when (equipmentSlot) {
-                                EquipmentSlot.MAINHAND -> " in hand"
-                                EquipmentSlot.OFFHAND -> " in offhand"
-                                EquipmentSlot.HEAD -> " on head"
-                                EquipmentSlot.CHEST -> " on chest"
-                                EquipmentSlot.LEGS -> " on legs"
-                                EquipmentSlot.FEET -> " on feet"
-                            }).formatted(Formatting.DARK_GRAY))
                     )
                 }
 
@@ -248,5 +196,39 @@ object ItemDisplay {
                     list.removeAt(i)
 
         return list
+    }
+
+    private fun determineRarity(stack: ItemStack): Rarity {
+        val item = stack.item
+
+        if (item is HasRarity)
+            return item.rarity
+
+        if (item is EnchantedBookItem) {
+            val enchants = EnchantedBookItem.getEnchantmentNbt(stack)
+
+            return enchants.indices
+                .asSequence()
+                .map { enchants.getCompound(it) }
+                .map { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(it)) }
+                .mapNotNull { it as? HasRarity }
+                .map { it.rarity }
+                .maxByOrNull { it.ordinal } ?: Rarity.Uncommon
+        }
+
+        // Base Item
+        val base = Rarity.fromItemRarity(stack.rarity)
+
+        val enchantmentRarity = stack.enchantments.indices
+            .asSequence()
+            .map { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(stack.enchantments.getCompound(it))) }
+            .mapNotNull { it as? HasRarity }
+            .map { it.rarity }
+            .maxByOrNull { it.ordinal } ?: Rarity.Common
+
+        if (enchantmentRarity.ordinal > base.ordinal)
+            return enchantmentRarity
+
+        return base
     }
 }
