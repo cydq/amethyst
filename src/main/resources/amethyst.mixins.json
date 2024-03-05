@@ -14,7 +14,9 @@
     "mana.MixinPlayerManaRegen",
     "respawn.MixinRemoveGrace",
     "respawn.MixinRespawnPlayer",
+    "respawn.MixinSpawnPlayer",
     "vanilla.MixinArmorItem",
+    "vanilla.MixinHungerHeal",
     "vanilla.MixinMiningToolItem",
     "vanilla.MixinSwordItem"
   ],

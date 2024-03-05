@@ -25,3 +25,5 @@ accessible method net/minecraft/entity/LivingEntity  getSoundVolume   ()F
 accessible method net/minecraft/entity/LivingEntity  playHurtSound    (Lnet/minecraft/entity/damage/DamageSource;)V
 
 accessible method net/minecraft/entity/mob/MobEntity  disablePlayerShield   (Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)V
+
+accessible field  net/minecraft/entity/attribute/EntityAttributeModifier  name  Ljava/lang/String;

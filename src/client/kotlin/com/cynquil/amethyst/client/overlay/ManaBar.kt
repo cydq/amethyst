@@ -1,15 +1,18 @@
 package com.cynquil.amethyst.client.overlay
 
+
 import com.cynquil.amethyst.extensions.mana
 import com.cynquil.amethyst.extensions.maxMana
+import com.cynquil.amethyst.magic.ManaHolder
+import com.cynquil.amethyst.model.LivingEntityMana
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.Identifier
 import kotlin.math.abs
 import kotlin.math.ceil
-
 object ManaBar {
     private val mc = MinecraftClient.getInstance()
 
