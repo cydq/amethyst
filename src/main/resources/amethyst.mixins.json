@@ -3,6 +3,8 @@
   "package": "com.cynquil.amethyst.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ability.MixinItemAbility",
+    "ability.MixinItemStackAbility",
     "attribute.MixinAttributeHealth",
     "attribute.MixinAttributeSync",
     "attribute.MixinGenericAttributes",
@@ -12,7 +14,6 @@
     "combat.MixinPlayerDamage",
     "mana.MixinEntityMana",
     "mana.MixinPlayerManaRegen",
-    "respawn.MixinRemoveGrace",
     "respawn.MixinRespawnPlayer",
     "respawn.MixinSpawnPlayer",
     "vanilla.MixinArmorItem",

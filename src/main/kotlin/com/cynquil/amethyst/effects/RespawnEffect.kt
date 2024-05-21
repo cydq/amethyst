@@ -12,10 +12,8 @@ object RespawnEffect : StatusEffect(StatusEffectCategory.BENEFICIAL, 0x76eec6) {
         true
 
     override fun applyUpdateEffect(entity: LivingEntity?, amplifier: Int) {
-        if (entity == null) return //  || entity.maxHealth <= entity.defaultMaxHealth
-
+        if (entity == null) return
         entity.health = entity.maxHealth
-//        entity.removeStatusEffect(this)
     }
 
     fun register() {

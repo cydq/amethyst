@@ -14,9 +14,9 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - name: make gradle wrapper executable
-        run: chmod +x ./gradlew
-      - name: build
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Build with Gradle
         run: ./gradlew build
       - name: capture build artifacts
         uses: actions/upload-artifact@v3

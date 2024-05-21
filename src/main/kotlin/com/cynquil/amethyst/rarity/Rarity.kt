@@ -1,49 +1,39 @@
 package com.cynquil.amethyst.rarity
 
+import com.cynquil.amethyst.AmRegistries
 import com.cynquil.amethyst.extensions.id
+import com.cynquil.amethyst.mod.Registrable
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
-enum class Rarity(val id: Identifier) {
-    Common("amethyst:common".id),
-    Uncommon("amethyst:uncommon".id),
-    Rare("amethyst:rare".id),
-    Epic("amethyst:epic".id),
-    Legendary("amethyst:legendary".id),
-    Mythic("amethyst:mythic".id),
-    Special("amethyst:special".id);
+data class Rarity(
+    val id: Identifier,
+    val weight: Int,
+    val itemRarity: net.minecraft.util.Rarity,
+    val enchantmentRarity: net.minecraft.enchantment.Enchantment.Rarity,
+) : Comparable<Rarity>, Registrable {
+    override operator fun compareTo(other: Rarity) =
+        weight.compareTo(other.weight)
 
-    val itemRarity
-        get() = when (this) {
-            Common -> net.minecraft.util.Rarity.COMMON
-            Uncommon -> net.minecraft.util.Rarity.UNCOMMON
-            Rare -> net.minecraft.util.Rarity.RARE
-            else -> net.minecraft.util.Rarity.EPIC
-        }
-
-    val enchantmentRarity
-        get() = when (this) {
-            Common -> net.minecraft.enchantment.Enchantment.Rarity.COMMON
-            Uncommon -> net.minecraft.enchantment.Enchantment.Rarity.UNCOMMON
-            Rare -> net.minecraft.enchantment.Enchantment.Rarity.RARE
-            else -> net.minecraft.enchantment.Enchantment.Rarity.VERY_RARE
-        }
-
-    operator fun compareTo(other: net.minecraft.util.Rarity) =
-        ordinal.compareTo(other.ordinal)
+    override fun register() {
+        Registry.register(AmRegistries.Rarity, id, this)
+    }
 
     companion object {
-        fun fromItemRarity(rarity: net.minecraft.util.Rarity) = when (rarity) {
-            net.minecraft.util.Rarity.COMMON -> Common
-            net.minecraft.util.Rarity.UNCOMMON -> Uncommon
-            net.minecraft.util.Rarity.RARE -> Rare
-            net.minecraft.util.Rarity.EPIC -> Epic
-        }
+        fun fromItemRarity(rarity: net.minecraft.util.Rarity) =
+            AmRegistries.Rarity.get(when (rarity) {
+                net.minecraft.util.Rarity.COMMON -> "amethyst:common"
+                net.minecraft.util.Rarity.UNCOMMON -> "amethyst:uncommon"
+                net.minecraft.util.Rarity.RARE -> "amethyst:rare"
+                net.minecraft.util.Rarity.EPIC -> "amethyst:epic"
+            }.id)!!
 
-        fun fromEnchantmentRarity(rarity: net.minecraft.enchantment.Enchantment.Rarity) = when (rarity) {
-            net.minecraft.enchantment.Enchantment.Rarity.COMMON -> Common
-            net.minecraft.enchantment.Enchantment.Rarity.UNCOMMON -> Uncommon
-            net.minecraft.enchantment.Enchantment.Rarity.RARE -> Rare
-            net.minecraft.enchantment.Enchantment.Rarity.VERY_RARE -> Epic
-        }
+        fun fromEnchantmentRarity(rarity: net.minecraft.enchantment.Enchantment.Rarity) =
+            AmRegistries.Rarity.get(when (rarity) {
+                net.minecraft.enchantment.Enchantment.Rarity.COMMON -> "amethyst:common"
+                net.minecraft.enchantment.Enchantment.Rarity.UNCOMMON -> "amethyst:uncommon"
+                net.minecraft.enchantment.Enchantment.Rarity.RARE -> "amethyst:rare"
+                net.minecraft.enchantment.Enchantment.Rarity.VERY_RARE -> "amethyst:epic"
+            }.id)
     }
 }

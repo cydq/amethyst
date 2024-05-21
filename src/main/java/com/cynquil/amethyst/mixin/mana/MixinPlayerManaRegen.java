@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinPlayerManaRegen {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void tickMovement(CallbackInfo ci) {
-        ((PlayerEntity)(Object)this).regenMana(1f);
+        ((PlayerEntity)(Object)this).regenMana(.5f);
     }
 }

@@ -1,19 +1,18 @@
 package com.cynquil.amethyst.client.util
 
+import com.cynquil.amethyst.AmRegistries
 import com.cynquil.amethyst.attribute.Attribute
-import com.cynquil.amethyst.attribute.Attributes
-import com.cynquil.amethyst.client.color.style
-import com.cynquil.amethyst.client.color.tooltipText
+import com.cynquil.amethyst.client.rarity.resource
+import com.cynquil.amethyst.client.rarity.tooltipText
+import com.cynquil.amethyst.extensions.id
 import com.cynquil.amethyst.rarity.HasRarity
 import com.cynquil.amethyst.rarity.Rarity
 import com.ibm.icu.text.DecimalFormat
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.enchantment.EnchantmentHelper
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributeModifier
-import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
 import net.minecraft.nbt.NbtElement
@@ -32,10 +31,10 @@ object ItemDisplay {
         if (nbt != null && nbt.contains(ItemStack.NAME_KEY, NbtElement.STRING_TYPE.toInt())) {
             try {
                 val text = Text.Serialization.fromJson(nbt.getString(ItemStack.NAME_KEY))
-                if (text != null) return text.copyContentOnly().setStyle(rarity.style)
+                if (text != null) return text.copyContentOnly().setStyle(rarity.resource.style)
 
                 nbt.remove(ItemStack.NAME_KEY)
-            } catch (exception: Exception) {
+            } catch (_: Exception) {
                 nbt.remove(ItemStack.NAME_KEY)
             }
         }
@@ -43,7 +42,7 @@ object ItemDisplay {
         return item
             .getName(stack)
             .copyContentOnly()
-            .styled { it.withColor(rarity.style.color) }
+            .styled { it.withColor(rarity.resource.style.color) }
 //            .setStyle(if (stack.hasCustomName()) rarity.secondaryStyle else rarity.style)
     }
 
@@ -61,7 +60,7 @@ object ItemDisplay {
 
         // NAME
         val rarity = determineRarity(stack)
-        list.add(stack.name.copy().styled { it.withColor(rarity.style.color) })
+        list.add(stack.name.copy().styled { it.withColor(rarity.resource.style.color) })
 //        list.add(stack.name.copy().setStyle(if (stack.hasCustomName()) rarity.secondaryStyle else rarity.style))
 
         // MAP ID SECTION
@@ -213,7 +212,7 @@ object ItemDisplay {
                 .map { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(it)) }
                 .mapNotNull { it as? HasRarity }
                 .map { it.rarity }
-                .maxByOrNull { it.ordinal } ?: Rarity.Uncommon
+                .maxByOrNull { it } ?: AmRegistries.Rarity.get("amethyst:common".id)!!
         }
 
         // Base Item
@@ -224,9 +223,9 @@ object ItemDisplay {
             .map { Registries.ENCHANTMENT.get(EnchantmentHelper.getIdFromNbt(stack.enchantments.getCompound(it))) }
             .mapNotNull { it as? HasRarity }
             .map { it.rarity }
-            .maxByOrNull { it.ordinal } ?: Rarity.Common
+            .maxByOrNull { it } ?: AmRegistries.Rarity.get("amethyst:common".id)!!
 
-        if (enchantmentRarity.ordinal > base.ordinal)
+        if (enchantmentRarity > base)
             return enchantmentRarity
 
         return base

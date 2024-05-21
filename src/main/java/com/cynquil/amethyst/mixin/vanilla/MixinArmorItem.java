@@ -1,11 +1,13 @@
 package com.cynquil.amethyst.mixin.vanilla;
 
+import com.cynquil.amethyst.AmRegistries;
 import com.cynquil.amethyst.attribute.Attributes;
 import com.google.common.collect.ImmutableMultimap;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.*;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @Mixin(ArmorItem.class)
@@ -38,7 +41,7 @@ public abstract class MixinArmorItem {
         @Local ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder
     ) {
         builder.put(
-            Attributes.INSTANCE.getDefense(),
+            Attributes.getDefense(),
             new EntityAttributeModifier(
                 uuid,
                 "Armor modifier",

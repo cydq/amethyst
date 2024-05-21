@@ -1,4 +1,6 @@
 {
+  "message.amethyst.not_enough_mana": "You do not have enough mana!",
+
   "rarity.amethyst.common": "COMMON",
   "rarity.amethyst.uncommon": "UNCOMMON",
   "rarity.amethyst.rare": "RARE",
@@ -7,29 +9,17 @@
   "rarity.amethyst.mythic": "MYTHIC",
   "rarity.amethyst.special": "SPECIAL",
 
-  "attribute.name.amethyst.health": "Health",
-  "attribute.name.amethyst.intelligence": "Intelligence",
-  "attribute.name.amethyst.strength": "Strength",
-  "attribute.name.amethyst.critical_chance": "Critical Chance",
-  "attribute.name.amethyst.critical_damage": "Critical Damage",
-  "attribute.name.amethyst.defense": "Defense",
-  "attribute.name.amethyst.attack_speed": "Attack Speed",
-  "attribute.name.amethyst.ferocity": "Ferocity",
-  "attribute.name.amethyst.speed": "Speed",
-  "attribute.name.amethyst.magic_find": "Magic Find",
-
-  "attribute.name.amethyst.damage": "Damage",
-
-  "attribute.symbol.amethyst.health": "❤",
-  "attribute.symbol.amethyst.intelligence": "✎",
-  "attribute.symbol.amethyst.strength": "❁",
-  "attribute.symbol.amethyst.critical_chance": "☣",
-  "attribute.symbol.amethyst.critical_damage": "☠",
-  "attribute.symbol.amethyst.defense": "❈",
-  "attribute.symbol.amethyst.attack_speed": "⚔",
-  "attribute.symbol.amethyst.ferocity": "⫽",
-  "attribute.symbol.amethyst.speed": "✦",
-  "attribute.symbol.amethyst.magic_find": "✯",
+  "attribute.amethyst.health": "Health",
+  "attribute.amethyst.intelligence": "Intelligence",
+  "attribute.amethyst.strength": "Strength",
+  "attribute.amethyst.critical_chance": "Critical Chance",
+  "attribute.amethyst.critical_damage": "Critical Damage",
+  "attribute.amethyst.defense": "Defense",
+  "attribute.amethyst.attack_speed": "Attack Speed",
+  "attribute.amethyst.ferocity": "Ferocity",
+  "attribute.amethyst.speed": "Speed",
+  "attribute.amethyst.magic_find": "Magic Find",
+  "attribute.amethyst.damage": "Damage",
 
   "effect.amethyst.fresh_soul": "Fresh Soul"
 }

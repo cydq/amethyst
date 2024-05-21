@@ -51,8 +51,9 @@ public abstract class MixinEntityMana implements LivingEntityMana {
 
     @Inject(method = "updateAttribute", at = @At("HEAD"))
     public void updateAttribute(EntityAttribute attribute, CallbackInfo ci) {
-        if (attribute == Attributes.INSTANCE.getIntelligence()) {
+        if (attribute == Attributes.getIntelligence()) {
             float maxMana = getMaxMana();
+
             if (getMana() > maxMana) {
                 setMana(maxMana);
             }
@@ -71,7 +72,7 @@ public abstract class MixinEntityMana implements LivingEntityMana {
 
     @Override
     public float getMaxMana() {
-        return 100f + (float)getAttributeValue(Attributes.INSTANCE.getIntelligence());
+        return 100f + (float)getAttributeValue(Attributes.getIntelligence());
     }
 
     @Override

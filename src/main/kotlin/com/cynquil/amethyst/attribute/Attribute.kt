@@ -1,19 +1,22 @@
 package com.cynquil.amethyst.attribute
 
+import com.cynquil.amethyst.AmRegistries
 import com.cynquil.amethyst.attribute.sync.ReplaceTarget
 import com.cynquil.amethyst.attribute.sync.SyncTarget
+import com.cynquil.amethyst.mod.Registrable
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 
-open class Attribute(
+data class Attribute(
     val id: Identifier,
     val min: Double = Double.NEGATIVE_INFINITY,
     val max: Double = Double.POSITIVE_INFINITY,
     val default: Double = .0,
-) : EntityAttribute("attribute.name.${id.namespace}.${id.path}", default) {
+    val hidden: Boolean = false,
+) : EntityAttribute("attribute.name.${id.namespace}.${id.path}", default), Registrable {
     private val syncedAttributeList = mutableListOf<EntityAttribute>()
 
     val syncedAttributes: Set<EntityAttribute>
@@ -32,9 +35,9 @@ open class Attribute(
     fun sync(
         target: EntityAttribute,
         syncBase: Boolean = false,
-        transform: (Double, Double) -> Double = { x, _ -> x }
+        transform: ((Double, Double) -> Double)? = null
     ): Attribute {
-        syncTable[target] = SyncTarget(this, target, syncBase, transform)
+        syncTable[target] = SyncTarget(this, target, syncBase, transform ?: { x, _ -> x })
         syncedAttributeList.add(target)
         return this
     }
@@ -46,8 +49,10 @@ open class Attribute(
         return this
     }
 
-    fun register(): Attribute =
+    override fun register() {
         Registry.register(Registries.ATTRIBUTE, id, this)
+        Registry.register(AmRegistries.Attribute, id, this)
+    }
 
     override fun clamp(value: Double): Double =
         MathHelper.clamp(value, min, max)

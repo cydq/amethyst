@@ -1,0 +1,11 @@
+{
+  "min": 1.0,
+  "default": 100.0,
+  "sync": [
+    {
+      "type": "replace",
+      "attribute": "generic.max_health",
+      "transform": "scale_health"
+    }
+  ]
+}

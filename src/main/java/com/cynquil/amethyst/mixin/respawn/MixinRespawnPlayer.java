@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class MixinRespawnPlayer {
     @Redirect(method = "respawnPlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;setHealth(F)V"))
     public void respawnPlayer(ServerPlayerEntity player, float v) {
-        player.addStatusEffect(new StatusEffectInstance(RespawnEffect.INSTANCE, 15));
+        player.addStatusEffect(new StatusEffectInstance(RespawnEffect.INSTANCE, 3));
     }
 }

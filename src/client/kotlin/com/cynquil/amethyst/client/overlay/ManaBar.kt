@@ -1,24 +1,22 @@
 package com.cynquil.amethyst.client.overlay
 
 
+import com.cynquil.amethyst.extensions.id
 import com.cynquil.amethyst.extensions.mana
 import com.cynquil.amethyst.extensions.maxMana
-import com.cynquil.amethyst.magic.ManaHolder
-import com.cynquil.amethyst.model.LivingEntityMana
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.util.Identifier
 import kotlin.math.abs
 import kotlin.math.ceil
+
 object ManaBar {
     private val mc = MinecraftClient.getInstance()
 
-    private val fullManaBar = Identifier("amethyst", "textures/gui/manabars/full.png")
-    private val intermediateHealthBar = Identifier("amethyst", "textures/gui/manabars/intermediate.png")
-    private val emptyManaBar = Identifier("amethyst", "textures/gui/manabars/empty.png")
+    private val fullManaBar = "amethyst:textures/gui/manabars/full.png".id
+    private val intermediateHealthBar = "amethyst:textures/gui/manabars/intermediate.png".id
+    private val emptyManaBar = "amethyst:textures/gui/manabars/empty.png".id
 
     private var intermediateMana = 0.0
 

@@ -1,11 +1,11 @@
 package com.cynquil.amethyst.client.overlay
 
+import com.cynquil.amethyst.extensions.id
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.util.Identifier
 import kotlin.math.abs
 import kotlin.math.ceil
 
@@ -14,15 +14,15 @@ import kotlin.math.ceil
 object HealthBar {
     private val mc = MinecraftClient.getInstance()
 
-    private val fullHealthBar = Identifier("amethyst", "textures/gui/healthbars/full.png")
-    private val witherHealthBar = Identifier("amethyst", "textures/gui/healthbars/wither.png")
-    private val poisonHealthBar = Identifier("amethyst", "textures/gui/healthbars/poison.png")
-    private val frozenHealthBar = Identifier("amethyst", "textures/gui/healthbars/frozen.png")
-    private val intermediateHealthBar = Identifier("amethyst", "textures/gui/healthbars/intermediate.png")
-    private val emptyHealthBar = Identifier("amethyst", "textures/gui/healthbars/empty.png")
-    private val absorptionBar = Identifier("amethyst", "textures/gui/healthbars/absorption.png")
-    private val heartContainer = Identifier("minecraft", "textures/gui/sprites/hud/heart/container.png")
-    private val absorptionHeart = Identifier("minecraft", "textures/gui/sprites/hud/heart/absorbing_full.png")
+    private val fullHealthBar = "amethyst:textures/gui/healthbars/full.png".id
+    private val witherHealthBar = "amethyst:textures/gui/healthbars/wither.png".id
+    private val poisonHealthBar = "amethyst:textures/gui/healthbars/poison.png".id
+    private val frozenHealthBar = "amethyst:textures/gui/healthbars/frozen.png".id
+    private val intermediateHealthBar = "amethyst:textures/gui/healthbars/intermediate.png".id
+    private val emptyHealthBar = "amethyst:textures/gui/healthbars/empty.png".id
+    private val absorptionBar = "amethyst:textures/gui/healthbars/absorption.png".id
+    private val heartContainer = "minecraft:textures/gui/sprites/hud/heart/container.png".id
+    private val absorptionHeart = "minecraft:textures/gui/sprites/hud/heart/absorbing_full.png".id
 
     private var currentBar = fullHealthBar
     private var intermediateHealth = 0.0
@@ -70,6 +70,7 @@ object HealthBar {
         context.drawText(textRenderer, text, x - textRenderer.getWidth(text) - 6, y + 1, 0xFF0000, false)
     }
 
+    @Suppress("DuplicatedCode")
     private fun renderHealthBar(context: DrawContext, tickDelta: Float, x: Float, y: Float, player: PlayerEntity) {
         val health = player.health
         val maxHealth = player.maxHealth

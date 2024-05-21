@@ -10,7 +10,6 @@ public interface LivingEntityMana extends ManaHolder {
 
     @Override
     default void setMana(float mana) {
-
     }
 
     @Override
@@ -20,6 +19,5 @@ public interface LivingEntityMana extends ManaHolder {
 
     @Override
     default void regenMana(float amount) {
-
     }
 }

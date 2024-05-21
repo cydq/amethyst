@@ -1,0 +1,17 @@
+{
+  "min": 0.0,
+  "default": 100.0,
+  "max": 500.0,
+  "sync": [
+    {
+      "type": "sync",
+      "attribute": "generic.movement_speed",
+      "transform": "factor"
+    },
+    {
+      "type": "sync",
+      "attribute": "generic.flying_speed",
+      "transform": "factor"
+    }
+  ]
+}

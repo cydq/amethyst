@@ -1,0 +1,11 @@
+{
+  "min": 0.0,
+  "default": 100.0,
+  "sync": [
+    {
+      "type": "sync",
+      "attribute": "generic.attack_speed",
+      "transform": "factor"
+    }
+  ]
+}

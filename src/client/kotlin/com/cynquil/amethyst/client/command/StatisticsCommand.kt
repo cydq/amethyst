@@ -2,11 +2,9 @@ package com.cynquil.amethyst.client.command
 
 import com.cynquil.amethyst.attribute.Attribute
 import com.cynquil.amethyst.attribute.Attributes
-import com.cynquil.amethyst.client.color.style
+import com.cynquil.amethyst.client.attribute.resource
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
-import com.mojang.brigadier.exceptions.CommandExceptionType
-import com.mojang.brigadier.exceptions.CommandSyntaxException
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType
 import com.mojang.brigadier.suggestion.SuggestionProvider
 import com.mojang.brigadier.suggestion.Suggestions
@@ -14,7 +12,6 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
-import net.minecraft.client.network.ClientCommandSource
 import net.minecraft.command.CommandSource
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.registry.Registries
@@ -66,8 +63,8 @@ object StatisticsCommand {
     }
 
     private fun attributeOverview(attribute: Attribute, value: Double): Text {
-        val icon = Text.translatable("attribute.symbol.${attribute.id.namespace}.${attribute.id.path}").setStyle(attribute.style)
-        val name = Text.translatable(attribute.translationKey).setStyle(attribute.style)
+        val icon = Text.translatable("attribute.symbol.${attribute.id.namespace}.${attribute.id.path}").setStyle(attribute.resource.style)
+        val name = Text.translatable(attribute.translationKey).setStyle(attribute.resource.style)
 
         val display = Text.empty()
             .append(icon)

@@ -37,7 +37,8 @@
   ],
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_1309": ["com/cynquil/amethyst/model/LivingEntityMana"]
+      "net/minecraft/class_1309": ["com/cynquil/amethyst/model/LivingEntityMana"],
+      "net/minecraft/class_1799": ["com/cynquil/amethyst/model/ItemStackAbility"]
     }
   },
   "depends": {

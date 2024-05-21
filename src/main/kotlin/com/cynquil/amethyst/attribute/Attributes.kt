@@ -1,49 +1,47 @@
 package com.cynquil.amethyst.attribute
 
+import com.cynquil.amethyst.AmRegistries
 import com.cynquil.amethyst.extensions.id
-import net.minecraft.entity.attribute.EntityAttributes
 
 object Attributes {
-    private val allValues = mutableListOf<Attribute>()
-    private val values = mutableListOf<Attribute>()
+    @JvmStatic
+    val attackSpeed by lazy { AmRegistries.Attribute.get("amethyst:attack_speed".id)!! }
 
-    val Health = attr("amethyst:health", min = 100.0, default = 100.0)
-        .replace(EntityAttributes.GENERIC_MAX_HEALTH) { it * 5 }
+    @JvmStatic
+    val criticalChance by lazy { AmRegistries.Attribute.get("amethyst:critical_chance".id)!! }
 
-    val AttackSpeed = attr("amethyst:attack_speed", min = 0.0, default = 100.0)
-        .sync(EntityAttributes.GENERIC_ATTACK_SPEED) { v, o -> o * v / 100 }
+    @JvmStatic
+    val criticalDamage by lazy { AmRegistries.Attribute.get("amethyst:critical_damage".id)!! }
 
-    val Speed = attr("amethyst:speed", min = 0.0, default = 100.0, max = 500.0)
-        .sync(EntityAttributes.GENERIC_MOVEMENT_SPEED) { v, o -> o * v / 100 }
-        .sync(EntityAttributes.GENERIC_FLYING_SPEED) { v, o -> o * v / 100 }
+    @JvmStatic
+    val damage by lazy { AmRegistries.Attribute.get("amethyst:damage".id)!! }
 
-    val Intelligence = attr("amethyst:intelligence", min = 0.0, default = 0.0)
-    val Strength = attr("amethyst:strength", min = 0.0, default = 0.0)
-    val CriticalChance = attr("amethyst:critical_chance", min = 0.0, max = 100.0, default = 10.0)
-    val CriticalDamage = attr("amethyst:critical_damage", min = 0.0, default = 50.0)
-    val Defense = attr("amethyst:defense", min = 0.0, default = 0.0)
-    val Ferocity = attr("amethyst:ferocity", min = 0.0, default = 0.0)
-    val MagicFind = attr("amethyst:magic_find", default = 0.0)
+    @JvmStatic
+    val defense by lazy { AmRegistries.Attribute.get("amethyst:defense".id)!! }
 
-    val Damage = attr("amethyst:damage", min = 0.0, default = 5.0, hidden = true)
+    @JvmStatic
+    val ferocity by lazy { AmRegistries.Attribute.get("amethyst:ferocity".id)!! }
 
-    private fun attr(
-        id: String,
-        min: Double = Double.NEGATIVE_INFINITY,
-        max: Double = Double.POSITIVE_INFINITY,
-        default: Double = .0,
-        hidden: Boolean = false,
-    ): Attribute =
-        Attribute(id.id, min, max, default)
-            .register()
-            .also { allValues.add(it) }
-            .also { if (!hidden) values.add(it) }
+    @JvmStatic
+    val health by lazy { AmRegistries.Attribute.get("amethyst:health".id)!! }
+
+    @JvmStatic
+    val intelligence by lazy { AmRegistries.Attribute.get("amethyst:intelligence".id)!! }
+
+    @JvmStatic
+    val magicFind by lazy { AmRegistries.Attribute.get("amethyst:magic_find".id)!! }
+
+    @JvmStatic
+    val speed by lazy { AmRegistries.Attribute.get("amethyst:speed".id)!! }
+
+    @JvmStatic
+    val strength by lazy { AmRegistries.Attribute.get("amethyst:strength".id)!! }
 
     @JvmStatic
     fun values(): List<Attribute> =
-        values
+        allValues().filter { !it.hidden }
 
     @JvmStatic
     fun allValues(): List<Attribute> =
-        allValues
+        AmRegistries.Attribute.toList()
 }

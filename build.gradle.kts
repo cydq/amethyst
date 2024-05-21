@@ -7,6 +7,7 @@ plugins {
     id("fabric-loom") version "1.5-SNAPSHOT"
     id("maven-publish")
     id("org.jetbrains.kotlin.jvm") version "1.9.22"
+    kotlin("plugin.serialization") version "2.0.0-RC3"
 }
 
 val props = Properties(project.properties)
@@ -16,13 +17,6 @@ group = props.mavenGroup
 
 base {
     archivesName = props.archivesBaseName
-}
-
-repositories {
-    maven {
-        name = "ParchmentMC"
-        url = URI("https://maven.parchmentmc.org")
-    }
 }
 
 loom {
@@ -44,13 +38,11 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${props.loaderVersion}")
 
     mappings("net.fabricmc:yarn:${props.yarnMappings}:v2")
-//    mappings(loom.layered {
-//        officialMojangMappings()
-//        parchment("org.parchmentmc.data:parchment-1.20.3:2023.12.31@zip")
-//    })
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${props.fabricVersion}")
     modImplementation("net.fabricmc:fabric-language-kotlin:${props.kotlinVersion}")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0-RC")
 }
 
 tasks {
@@ -59,10 +51,6 @@ tasks {
         inputs.property("minecraft_version", props.minecraftVersion)
         inputs.property("loader_version", props.loaderVersion)
         inputs.property("fabric_version", props.fabricVersion)
-
-//        filteringCharset {
-//            charset("UTF-8")
-//        }
 
         filesMatching("fabric.mod.json") {
             expand(

@@ -5,37 +5,37 @@ import com.cynquil.amethyst.model.LivingEntityMana
 import net.minecraft.entity.LivingEntity
 
 val LivingEntity.amHealth: Double
-    get() = getAttributeValue(Attributes.Health)
+    get() = getAttributeValue(Attributes.health)
 
 val LivingEntity.amAttackSpeed: Double
-    get() = getAttributeValue(Attributes.AttackSpeed)
+    get() = getAttributeValue(Attributes.attackSpeed)
 
 val LivingEntity.amSpeed: Double
-    get() = getAttributeValue(Attributes.Speed)
+    get() = getAttributeValue(Attributes.speed)
 
 val LivingEntity.amIntelligence: Double
-    get() = getAttributeValue(Attributes.Intelligence)
+    get() = getAttributeValue(Attributes.intelligence)
 
 val LivingEntity.amStrength: Double
-    get() = getAttributeValue(Attributes.Strength)
+    get() = getAttributeValue(Attributes.strength)
 
 val LivingEntity.amCritChance: Double
-    get() = getAttributeValue(Attributes.CriticalChance)
+    get() = getAttributeValue(Attributes.criticalChance)
 
 val LivingEntity.amCritDamage: Double
-    get() = getAttributeValue(Attributes.CriticalDamage)
+    get() = getAttributeValue(Attributes.criticalDamage)
 
 val LivingEntity.amDefense: Double
-    get() = getAttributeValue(Attributes.Defense)
+    get() = getAttributeValue(Attributes.defense)
 
 val LivingEntity.amFerocity: Double
-    get() = getAttributeValue(Attributes.Ferocity)
+    get() = getAttributeValue(Attributes.ferocity)
 
 val LivingEntity.amMagicFind: Double
-    get() = getAttributeValue(Attributes.MagicFind)
+    get() = getAttributeValue(Attributes.magicFind)
 
 val LivingEntity.amDamage: Double
-    get() = getAttributeValue(Attributes.Damage)
+    get() = getAttributeValue(Attributes.damage)
 
 var LivingEntity.mana: Float
     get() = (this as LivingEntityMana).mana
